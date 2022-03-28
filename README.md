@@ -51,6 +51,6 @@ Libraries/modules used:
 
 
 ## Acknowledgements
-Data provided by: [Udacity](https://www.udacity.com), [Figure-eight](https://www.figure-eight.com)
+Data provided by: [Udacity](https://www.udacity.com), [Figure Eight](https://www.figure-eight.com)
 
 Files used: disaster_categories.csv, disaster_messages.csv

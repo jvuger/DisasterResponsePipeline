@@ -37,7 +37,7 @@ In this project, disaster data from [Figure Eight](https://www.figure-eight.com)
 ## Technologies
 * Python 3.7.2
 
-Libraries/modules used: 
+
 * json
 * plotly
 * pandas

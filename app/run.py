@@ -16,11 +16,18 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 def tokenize(text):
+    '''Tokenize, lemmatize, normalize case, remove leading/trailing white space'''
+    
+    # tokenize text
     tokens = word_tokenize(text)
+    
+    # initiate lemmatizer
     lemmatizer = WordNetLemmatizer()
 
     clean_tokens = []
+    # iterate through each token
     for tok in tokens:
+        # lemmatize, normalize case, and remove leading/trailing white space
         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
         clean_tokens.append(clean_tok)
 
@@ -43,6 +50,8 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    category_counts = df.iloc[:,4:].sum(axis=0, numeric_only = True)
+    category_names = list(category_counts.index)
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -62,6 +71,33 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=category_names,
+                    y=category_counts,
+                    textangle=55
+                )
+            ],
+            
+            'layout': {
+                'title': 'Distribution of Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'automargin': 'true',
+                    'title': {
+                        'text': "Category",
+                        'standoff': 200
+                    },
+                    'tickangle': -45,
+                    'tickfont': {
+                        'size': 8
+                    }
                 }
             }
         }

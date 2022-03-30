@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    '''Loads messages and categories datasets, and merges them together'''
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     
@@ -18,6 +19,7 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    '''Expands categories into columns, renames columns, drops duplicates'''
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(pat = ';', expand = True)
     
@@ -50,11 +52,13 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    '''Saves dataframe into an sqlite database'''
     engine = create_engine('sqlite:///messag_categ.db')
     df.to_sql('messag_categ', engine, index = False)
 
 
 def main():
+    '''Loads, cleanes and saves the data.'''
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]

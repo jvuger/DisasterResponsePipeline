@@ -25,6 +25,7 @@ from sklearn.model_selection import GridSearchCV
 import pickle
 
 def load_data(database_filepath):
+    '''Loads data from provided database filepath'''
     # load data from database
     engine = create_engine('sqlite:///'+database_filepath)
     df = pd.read_sql_table('messag_categ', engine)
@@ -36,6 +37,8 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    '''Tokenize, lemmatize, normalize case, remove leading/trailing white space'''
+    
     #tokenize text
     tokens = text.split()
     
@@ -53,6 +56,7 @@ def tokenize(text):
 
 
 def build_model():
+    '''Builds ML pipeline'''
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -69,15 +73,18 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''Evaluates the model by providing accuracy, precision and recall for each of the categories'''
     Y_pred = model.predict(X_test)
     print(classification_report(Y_test, Y_pred, target_names = category_names))
 
 
 def save_model(model, model_filepath):
+    '''Exports the model to a .pkl file'''
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
+    '''Loads the data. Builds, trains, evaluates and saves the model.'''
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))

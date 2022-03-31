@@ -45,6 +45,9 @@ def clean_data(df):
     # concatenate the original dataframe with the new 'categories' dataframe
     df = pd.concat([df, categories], axis = 1)
     
+    # replace erroneus value 2 with 1
+    df = df.replace(to_replace=2, value=1)
+    
     # drop duplicates
     df = df.drop_duplicates()
     
@@ -53,8 +56,8 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     '''Saves dataframe into an sqlite database'''
-    engine = create_engine('sqlite:///database_filename')
-    df.to_sql('database_filename', engine, index = False)
+    engine = create_engine('sqlite:///'+database_filename)
+    df.to_sql('DisasterResponse', engine, if_exists = 'replace', index = False)
 
 
 def main():

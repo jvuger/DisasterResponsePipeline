@@ -28,10 +28,9 @@ def load_data(database_filepath):
     '''Loads data from provided database filepath'''
     # load data from database
     engine = create_engine('sqlite:///'+database_filepath)
-    df = pd.read_sql_table('messag_categ', engine)
+    df = pd.read_sql_table('DisasterResponse', engine)
     X = df.message
     Y = df[df.columns[4:]]
-    Y = Y.replace(to_replace=2, value=0)
     category_names = Y.columns
     return X, Y, category_names
 

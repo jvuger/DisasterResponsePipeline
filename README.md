@@ -1,6 +1,6 @@
 # DisasterResponsePipeline
 
-In this project, disaster data from [Figure Eight](https://www.figure-eight.com) was analyzed in order to build a model that classifies disaster messages.
+In this project, disaster data from [Figure Eight](https://www.figure-eight.com) was analyzed in order to build a model that classifies disaster messages. In the event of a disaster, classifying incoming messages relieves emergency workers from the burden of going through the messages manually.
 
 ### Directory Structure
 

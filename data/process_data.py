@@ -53,8 +53,8 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     '''Saves dataframe into an sqlite database'''
-    engine = create_engine('sqlite:///messag_categ.db')
-    df.to_sql('messag_categ', engine, index = False)
+    engine = create_engine('sqlite:///database_filename')
+    df.to_sql('database_filename', engine, index = False)
 
 
 def main():
